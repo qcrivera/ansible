@@ -1,0 +1,24 @@
+--- #My first YAML playbook for ansible
+- hosts: apacheweb
+  user: cca-user
+  become: yes
+  connection: ssh
+  gather_facts: no
+  vars:
+    playbook_version: 0.1b
+  vars_files:
+    - conf/copyright.yml
+    - conf/webdefaults.yml
+  vars_prompt:
+    - name: pkg_name
+      prompt: Install which packager
+  tasks:
+    - name: Install appache ws
+      action: yum name=httpd state=installed
+      notify: Restart HTTPD
+    - name: Install the requested package
+      action: yum name={{ pkg_name }} state=installed
+  handlers:
+    - name: Restart HTTPD
+      action: service name=httpd state=restarted
+

@@ -1,0 +1,14 @@
+--- #WHEN example
+- hosts: apacheweb
+  user: cca-user
+  sudo: yes
+  connection: ssh
+  vars:
+    playbook_type: conditionalexample
+  tasks:
+    - name: Install Apache (Debian)
+      command: apt-get -y install apache2
+      when: ansible_os_family == "Debian"
+    - name: Install Apache (RedHat)
+      command: yum -y install httpd
+      when: ansible_os_family == "RedHat"

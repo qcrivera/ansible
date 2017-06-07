@@ -1,0 +1,11 @@
+--- # Full include example
+- hosts: apacheweb
+  user: cca-user
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - include: plays/packages.yml
+    - name: Veirfy the telnet package is installed
+      raw: yum list installed | grep telnet > /home/cca-user/pkgs.log
+  

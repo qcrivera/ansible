@@ -1,0 +1,13 @@
+--- # testing the j2 template module
+- hosts: apacheweb:debian
+  user: cca-user
+  connection: ssh
+  sudo: yes
+  gather_facts: yes
+  vars:
+    userName: cca-user
+    userPassword: pass
+    connectionType: SFTP
+  tasks:
+    - name: Install the configuration file costumized for the syste,
+      template: src=test.conf.j2 dest=/home/cca-user/test.conf owner=cca-user group=cca-user mode=750

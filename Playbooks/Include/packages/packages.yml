@@ -1,0 +1,5 @@
+- name: install apache
+  yum: pkg=httpd state=latest
+  notify: restart HTTP
+- name: install lynx
+  yum: pkg=lynx  state=latest
